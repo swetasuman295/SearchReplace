@@ -28,7 +28,8 @@ public class ProcessSearchReplaceImpl implements ProcessSearchReplace {
 					.collect(Collectors.toList());
 			Files.write(destination, replaced);
 			lines.close();
-			System.out.println("Find and Replace done!!!");
+			System.out.println(
+					"Find and Replace Completed ! " + searchWord + " is replaced with " + replaceWord + " .");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

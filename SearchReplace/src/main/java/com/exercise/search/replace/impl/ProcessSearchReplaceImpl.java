@@ -16,12 +16,15 @@ public class ProcessSearchReplaceImpl implements ProcessSearchReplace {
 	@Override
 	public void readFileSource(Model model) {
 		try {
+			String searchWord = model.getSearchWord().substring(1, model.getSearchWord().length() - 1);
+			String replaceWord = model.getReplaceWord().substring(1, model.getReplaceWord().length() - 1);
+
 			Path source = Paths.get(model.getSourceFile());
 
 			Path destination = Paths.get(model.getDestinationFile());
 			Stream<String> lines = Files.lines(source);
 
-			List<String> replaced = lines.map(line -> line.replaceAll(model.getSearchWord(), model.getReplaceWord()))
+			List<String> replaced = lines.map(line -> line.replaceAll(searchWord, replaceWord))
 					.collect(Collectors.toList());
 			Files.write(destination, replaced);
 			lines.close();

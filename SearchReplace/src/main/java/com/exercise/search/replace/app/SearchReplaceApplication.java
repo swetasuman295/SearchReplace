@@ -8,11 +8,21 @@ import com.exercise.search.replace.impl.ProcessSearchReplaceImpl;
 import com.exercise.search.replace.impl.ValidateInputImpl;
 import com.exercise.search.replace.model.Model;
 
+/**
+ * @Description: Execution Starts from this Class. Command Line Arguments are
+ *               passed as Parameter at the start of the Application.
+ *
+ */
 public class SearchReplaceApplication {
 
+	/**
+	 * @param args
+	 * @throws ArgumentException
+	 * @throws InputArgumentException
+	 */
 	public static void main(String[] args) throws ArgumentException, InputArgumentException {
 
-		// "Use This in Path Variable to execute"
+		// "Use This in Variable to execute"
 		// xml “trace” “error” < src/main/resources/configuration.xml >
 		// src/main/resources/Results/result.xml
 
@@ -21,19 +31,17 @@ public class SearchReplaceApplication {
 		ProcessSearchReplace readFile = new ProcessSearchReplaceImpl();
 
 		if (args.length == 7) {
-			for (int i = 0; i < args.length; i++) {
-				model.setFileType(args[0]);
-				model.setSearchWord(args[1]);
-				model.setReplaceWord(args[2]);
-				model.setSourceFile(args[4]);
-				model.setDestinationFile(args[6]);
-			}
-		} else
+			model.setFileType(args[0]);
+			model.setSearchWord(args[1]);
+			model.setReplaceWord(args[2]);
+			model.setSourceFile(args[4]);
+			model.setDestinationFile(args[6]);
+
+		} else {
 			throw new ArgumentException(
 					"Please Provide input in the format : xml “trace” “error” < configuration.xml > result.xml");
-
+		}
 		validateInput.validateInputArgs(model);
 		readFile.readFileSource(model);
-
 	}
 }

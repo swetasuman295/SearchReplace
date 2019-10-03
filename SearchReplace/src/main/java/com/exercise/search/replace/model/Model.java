@@ -1,9 +1,8 @@
 package com.exercise.search.replace.model;
 
-import org.springframework.stereotype.Service;
-
-
-@Service
+/**
+ * @Description: POJO for Command line Arguments.
+ */
 public class Model {
 	private String fileType;
 	private String searchWord;

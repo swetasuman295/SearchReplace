@@ -1,5 +1,7 @@
 package com.exercise.search.replace.api;
 
+import java.nio.file.Path;
+
 import com.exercise.search.replace.model.Model;
 
 /**
@@ -9,6 +11,7 @@ import com.exercise.search.replace.model.Model;
 public interface ProcessSearchReplace {
 	/**
 	 * @param Takes Command Line Arguments as Model POJO Bean
+	 * @return 
 	 */
 	public void readFileSource(Model model);
 }

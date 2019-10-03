@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.swing.RepaintManager;
+
 import com.exercise.search.replace.api.ProcessSearchReplace;
 import com.exercise.search.replace.model.Model;
 
@@ -32,6 +34,7 @@ public class ProcessSearchReplaceImpl implements ProcessSearchReplace {
 
 			List<String> replaced = lines.map(line -> line.replaceAll(model.getSearchWord(), model.getReplaceWord()))
 					.collect(Collectors.toList());
+			
 			Files.write(destination, replaced);
 
 			System.out.println("Find and Replace Completed ! " + model.getSearchWord() + " is replaced with "

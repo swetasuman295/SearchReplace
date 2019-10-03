@@ -12,13 +12,14 @@ import com.exercise.search.replace.api.ProcessSearchReplace;
 import com.exercise.search.replace.model.Model;
 
 /**
- * @Description: Reads file and Searches for a word to be Replaced and then Replaces the word with the New Word. 
+ * @Description: Reads file and Searches for a word to be Replaced and then
+ *               Replaces the word with the New Word.
  *
  */
 public class ProcessSearchReplaceImpl implements ProcessSearchReplace {
 
 	/**
-	 * @Description: Takes Model POJO as parameter and then performs replace All. 
+	 * @Description: Takes Model POJO as parameter and then performs replace All.
 	 */
 	@Override
 	public void readFileSource(Model model) {
@@ -32,14 +33,15 @@ public class ProcessSearchReplaceImpl implements ProcessSearchReplace {
 			List<String> replaced = lines.map(line -> line.replaceAll(model.getSearchWord(), model.getReplaceWord()))
 					.collect(Collectors.toList());
 			Files.write(destination, replaced);
-			
-			lines.close();
-			
+
 			System.out.println("Find and Replace Completed ! " + model.getSearchWord() + " is replaced with "
-					+ model.getReplaceWord() + " .");
+					+ model.getReplaceWord() + ".");
+
+			lines.close();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-			
-		}
+
 	}
+}

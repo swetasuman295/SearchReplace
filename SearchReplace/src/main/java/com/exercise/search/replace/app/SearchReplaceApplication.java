@@ -39,7 +39,7 @@ public class SearchReplaceApplication {
 
 		} else {
 			throw new ArgumentException(
-					"Please Provide input in the format : xml “trace” “error” < configuration.xml > result.xml");
+					"Please Provide input in the format : fileType “searchWord” “replacedWord” < sourceFilePath > destinationFilePath");
 		}
 		validateInput.validateInputArgs(model);
 		readFile.readFileSource(model);

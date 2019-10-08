@@ -1,7 +1,5 @@
 package com.exercise.search.replace.api;
 
-import java.nio.file.Path;
-
 import com.exercise.search.replace.model.Model;
 
 /**

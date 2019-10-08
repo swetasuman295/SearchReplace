@@ -6,6 +6,8 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import com.exercise.search.replace.api.ValidateInput;
@@ -17,20 +19,21 @@ import com.exercise.search.replace.model.Model;
  *
  */
 public class ValidateInputImpl implements ValidateInput {
-	
-	ProcessTextFile processTextFile= new ProcessTextFile();
-	ProcessXmlFile processXmlFile=new ProcessXmlFile();
+	private static final Logger LOGGER = LoggerFactory.getLogger(ValidateInputImpl.class);
+	ProcessTextFile processTextFile = new ProcessTextFile();
+	ProcessXmlFile processXmlFile = new ProcessXmlFile();
 
 	/**
-	 * @throws IOException 
-	 * @throws TransformerException 
-	 * @throws SAXException 
-	 * @throws ParserConfigurationException 
+	 * @throws IOException
+	 * @throws TransformerException
+	 * @throws SAXException
+	 * @throws ParserConfigurationException
 	 * @Description: Validate File type, File Source and File Extension for Input
 	 *               Provided.
 	 */
 	@Override
-	public void validateInputArgs(Model model) throws InputArgumentException, IOException, ParserConfigurationException, SAXException, TransformerException {
+	public void validateInputArgs(Model model) throws InputArgumentException, IOException, ParserConfigurationException,
+			SAXException, TransformerException {
 		File source = new File(model.getSourceFile());
 		File destination = new File(model.getDestinationFile());
 
@@ -41,29 +44,25 @@ public class ValidateInputImpl implements ValidateInput {
 		validateSourceFile(source);
 
 		validateDestinationFileExtension(destination);
-		
-		validateXmlTypeSource(model,source);
-		
-		validateTextTypeSource(model,source);
+
+		validateXmlTypeSource(model, source);
+
+		validateTextTypeSource(model, source);
 
 	}
-
-	
 
 	private void validateTextTypeSource(Model model, File source) throws IOException {
-		if(model.getFileType().equalsIgnoreCase("txt") &&  source.getName().endsWith("txt")) {
-			processTextFile.textReadWrite(model);	
+		if (model.getFileType().equalsIgnoreCase("txt") && source.getName().endsWith("txt")) {
+			processTextFile.textReadWrite(model);
 		}
 	}
 
-
-
-	private void validateXmlTypeSource(Model model,File source) throws IOException, ParserConfigurationException, SAXException, TransformerException {
-		if(model.getFileType().equalsIgnoreCase("xml") &&  source.getName().endsWith("xml")) {
+	private void validateXmlTypeSource(Model model, File source)
+			throws IOException, ParserConfigurationException, SAXException, TransformerException {
+		if (model.getFileType().equalsIgnoreCase("xml") && source.getName().endsWith("xml")) {
 			processXmlFile.xmlReadWrite(model);
 		}
-		}
-
+	}
 
 	/**
 	 * @param destination
@@ -80,7 +79,7 @@ public class ValidateInputImpl implements ValidateInput {
 	 */
 	private void validateSourceFile(File source) throws InputArgumentException {
 		if (!(source.canRead() || source.exists() || source.isFile()) || source.getName().endsWith("*.xml")
-				|| source.getName().endsWith("*.txt") ||source.length()==0 )
+				|| source.getName().endsWith("*.txt") || source.length() == 0)
 			throw new InputArgumentException("Problem Exist with the Source File");
 	}
 

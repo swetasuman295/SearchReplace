@@ -1,10 +1,15 @@
 package com.exercise.search.replace.app;
 
-import com.exercise.search.replace.api.ProcessSearchReplace;
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
+
 import com.exercise.search.replace.api.ValidateInput;
 import com.exercise.search.replace.exception.ArgumentException;
 import com.exercise.search.replace.exception.InputArgumentException;
-import com.exercise.search.replace.impl.ProcessSearchReplaceImpl;
 import com.exercise.search.replace.impl.ValidateInputImpl;
 import com.exercise.search.replace.model.Model;
 
@@ -19,8 +24,12 @@ public class SearchReplaceApplication {
 	 * @param args
 	 * @throws ArgumentException
 	 * @throws InputArgumentException
+	 * @throws IOException 
+	 * @throws TransformerException 
+	 * @throws SAXException 
+	 * @throws ParserConfigurationException 
 	 */
-	public static void main(String[] args) throws ArgumentException, InputArgumentException {
+	public static void main(String[] args) throws ArgumentException, InputArgumentException, IOException, ParserConfigurationException, SAXException, TransformerException {
 
 		// "Use This in Variable to execute"
 		// xml “trace” “error” < src/main/resources/configuration.xml >
@@ -28,7 +37,6 @@ public class SearchReplaceApplication {
 
 		Model model = new Model();
 		ValidateInput validateInput = new ValidateInputImpl();
-		ProcessSearchReplace readFile = new ProcessSearchReplaceImpl();
 
 		if (args.length == 7) {
 			model.setFileType(args[0]);
@@ -36,12 +44,12 @@ public class SearchReplaceApplication {
 			model.setReplaceWord(args[2]);
 			model.setSourceFile(args[4]);
 			model.setDestinationFile(args[6]);
-
 		} else {
 			throw new ArgumentException(
 					"Please Provide input in the format : fileType “searchWord” “replacedWord” < sourceFilePath > destinationFilePath");
 		}
 		validateInput.validateInputArgs(model);
-		readFile.readFileSource(model);
+		
+
 	}
 }

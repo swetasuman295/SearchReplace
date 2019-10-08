@@ -1,4 +1,4 @@
-package com.exercise.search.replace.impl;
+package com.exercise.search.replace.impl.test;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,7 +18,7 @@ import com.exercise.search.replace.model.Model;
  *               Replaces the word with the New Word.
  *
  */
-public class ProcessSearchReplaceImpl implements ProcessSearchReplace {
+public class ReadFileInMemory implements ProcessSearchReplace {
 
 	/**
 	 * @Description: Takes Model POJO as parameter and then performs replace All.
